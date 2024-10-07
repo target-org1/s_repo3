@@ -1,0 +1,43 @@
+name: Sample-Java-project with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Get the version details
+      run: |
+        echo 1. files in this directory
+        ls -a
+        echo
+        echo 2. Java version
+        java --version
+        echo 3. Maven version
+        mvn --version
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: Run tests with maven
+      run: mvn test
+    - name: Upload JAR artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: sample-java-app-jar
+        path: target/*.jar
+
+    # Optional: Uploads full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+    #- name: Update dependency graph
+     # uses: advanced-security/maven-dependency-submission-action@latest
