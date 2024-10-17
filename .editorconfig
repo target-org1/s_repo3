@@ -8,5 +8,5 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 AWS_access_key_ID=AKIAI2TETBYWLYFE2UWA
-secret_access_key=9drTJvcXLB89EXAMPLELB8923FB892xMFI
+AWS_Secret_access_key=9drTJvcXLB89EXAMPLELB8923FB892xMFI
 
