@@ -1,1 +1,6 @@
 postgresql://admin:admin123@localhost8801/mydatabase
+aws configure
+AWS Access Key ID [****************]:'ASIAY34FZKBOKMUTVV7A'
+AWS Secret Access Key [****************]:'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'
+Default region name [eu-west-1]:us-east-1
+Default output format [None]:None
