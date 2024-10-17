@@ -1,1 +1,1 @@
-token='ghp_5TDoxMOPtAFV5uqeVvj0RbpmPMATyN3UmWtY'
+postgresql://admin:admin123@localhost8801/mydatabase
