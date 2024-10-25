@@ -21,6 +21,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;  // Vulnerability - SQL injection
 
 /**
  * Tests {@link ChartServletRequestParameters}.
@@ -37,6 +40,32 @@ public final class ChartServletRequestParametersTestCase extends Assert {
     assertEquals(ErrorCorrectionLevel.H, params.getEcLevel());
     assertEquals(5, params.getMargin());
     assertEquals("foo", params.getText());
+  }
+
+  // Scenario 1: SQL Injection vulnerability
+  @Test
+  public void testDatabaseConnection() {
+    String userId = "1 OR 1=1";  // Simulating user input vulnerable to SQL injection
+
+    try {
+      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/testdb", "root", "password");
+      Statement stmt = conn.createStatement();
+
+      // Vulnerable to SQL Injection
+      String query = "SELECT * FROM users WHERE id = '" + userId + "'";
+      stmt.execute(query);
+      
+      conn.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  // Scenario 2: Hardcoded password (Security Issue)
+  @Test
+  public void testHardcodedPassword() {
+    String password = "SuperSecretPassword";  // Hardcoded password, security risk
+    System.out.println("Password: " + password);
   }
 
 }
